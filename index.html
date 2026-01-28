@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Atelier de Sucre | ラトリエ・ドゥ・シュクレ</title>
+    <meta name="description" content="日常を、特別な一口に。厳選素材を使用した大人なパティスリー、ラトリエ・ドゥ・シュクレ。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            beige: '#F5F5F0',
+                            greige: '#D9D3CC',
+                            dark: '#2C2C2C',
+                            accent: '#A68B6D'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        en: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+        body { 
+            background-color: #F5F5F0; 
+            color: #2C2C2C; 
+            font-family: "Noto Serif JP", serif;
+            overflow-x: hidden;
+        }
+        
+        /* Reveal Animation */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        /* Interactive Elements */
+        .parallax-zoom { transition: transform 12s ease-out; }
+        .hero-zoom:hover .parallax-zoom { transform: scale(1.1); }
+        
+        .menu-card img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+        .menu-card:hover img { transform: scale(1.08); }
+        
+        .line-draw { position: relative; }
+        .line-draw::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: -4px; 
+            left: 0; 
+            width: 0; 
+            height: 1px; 
+            background: #A68B6D; 
+            transition: width 0.6s ease; 
+        }
+        .line-draw:hover::after { width: 100%; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F5F5F0; }
+        ::-webkit-scrollbar-thumb { background: #D9D3CC; }
+
+        /* Mobile Menu Overlay */
+        #mobile-menu-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[100] px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-500" id="main-nav">
+        <div class="text-xl md:text-2xl font-en font-bold tracking-[0.2em] text-brand-dark">L'Atelier de Sucre</div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-12 text-xs tracking-widest uppercase">
+            <a href="#concept" class="line-draw">Concept</a>
+            <a href="#menu" class="line-draw">Menu</a>
+            <a href="#access" class="line-draw">Access</a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="md:hidden flex flex-col space-y-1.5 z-[110]">
+            <span class="w-6 h-0.5 bg-brand-dark transition-transform" id="bar1"></span>
+            <span class="w-6 h-0.5 bg-brand-dark transition-opacity" id="bar2"></span>
+            <span class="w-6 h-0.5 bg-brand-dark transition-transform" id="bar3"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-brand-beige z-[105] flex flex-col items-center justify-center space-y-8 opacity-0 pointer-events-none transition-opacity duration-500">
+        <a href="#concept" class="text-2xl font-en italic mobile-link">Concept</a>
+        <a href="#menu" class="text-2xl font-en italic mobile-link">Menu</a>
+        <a href="#access" class="text-2xl font-en italic mobile-link">Access</a>
+        <div class="pt-8 text-xs tracking-[0.3em] text-brand-accent">SINCE 2024</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden hero-zoom">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" 
+                 alt="Main Cake Visual" class="w-full h-full object-cover parallax-zoom opacity-90">
+            <div class="absolute inset-0 bg-black/20"></div>
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <span class="block text-white text-xs md:text-sm tracking-[0.5em] mb-6 reveal uppercase">Artisanal Patisserie</span>
+            <h1 class="text-white text-4xl md:text-7xl font-serif font-light mb-10 reveal leading-tight" style="transition-delay: 0.2s;">
+                日常を、特別な一口に。
+            </h1>
+            <div class="reveal" style="transition-delay: 0.4s;">
+                <a href="#menu" class="inline-block border border-white text-white px-12 py-4 text-[10px] md:text-xs tracking-[0.4em] hover:bg-white hover:text-brand-dark transition-all duration-700">
+                    VIEW SELECTIONS
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-[10px] tracking-[0.3em] animate-bounce">
+            SCROLL
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-24 md:py-40 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-[10px] text-brand-accent tracking-[0.5em] uppercase mb-10 reveal font-bold">Our Philosophy</h2>
+            <h3 class="text-2xl md:text-4xl leading-relaxed mb-16 reveal font-light" style="transition-delay: 0.2s;">
+                甘さは、引き算。<br>
+                素材が語り出す、大人のための静かな時間。
+            </h3>
+            <p class="text-brand-dark/70 leading-[2.5] text-sm md:text-base mb-24 reveal max-w-2xl mx-auto" style="transition-delay: 0.4s;">
+                「L'Atelier de Sucre」が大切にしているのは、デコレーションよりも「素材の純度」です。<br>
+                北海道の広大な大地で育まれた発酵バター、産地から直接届く旬の果実。<br>
+                それらを丁寧に、静かに、一皿の芸術へと仕立てます。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                <div class="reveal overflow-hidden rounded-sm" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" 
+                         alt="厳選された素材" class="w-full h-[500px] object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000">
+                </div>
+                <div class="reveal overflow-hidden rounded-sm mt-0 md:mt-32" style="transition-delay: 0.4s;">
+                    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80" 
+                         alt="製作風景" class="w-full h-[500px] object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-1000">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 md:py-40 bg-[#EFEFEA] px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-20 reveal border-b border-brand-dark/10 pb-8">
+                <div>
+                    <h2 class="text-[10px] text-brand-accent tracking-[0.5em] uppercase mb-4 font-bold">Collections</h2>
+                    <h3 class="text-4xl font-en italic">Signature Menu</h3>
+                </div>
+                <p class="text-[10px] tracking-[0.3em] mt-4 md:mt-0 text-brand-dark/40 uppercase">Selected Seasonal Delights</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+                <!-- Item 1 -->
+                <div class="menu-card reveal group cursor-pointer" style="transition-delay: 0.1s;">
+                    <div class="overflow-hidden mb-8 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=600&q=80" 
+                             alt="Seasonal Tart" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-xl mb-3 font-medium">季節のフルーツタルト</h4>
+                        <p class="text-xs text-brand-dark/60 leading-relaxed mb-6 h-12">その時々で最も輝く果実を、サクサクの自家製生地と共に。</p>
+                        <p class="font-en text-lg tracking-widest text-brand-accent">¥850</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-card reveal group cursor-pointer" style="transition-delay: 0.3s;">
+                    <div class="overflow-hidden mb-8 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed2bb4?auto=format&fit=crop&w=600&q=80" 
+                             alt="Chocolate Cake" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-xl mb-3 font-medium">濃厚ショコラ・ノワール</h4>
+                        <p class="text-xs text-brand-dark/60 leading-relaxed mb-6 h-12">カカオ70%のビターチョコを使用した、とろけるような口どけ。</p>
+                        <p class="font-en text-lg tracking-widest text-brand-accent">¥780</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-card reveal group cursor-pointer" style="transition-delay: 0.5s;">
+                    <div class="overflow-hidden mb-8 aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1464305795204-6f5bdf7f8740?auto=format&fit=crop&w=600&q=80" 
+                             alt="Mont Blanc" class="w-full h-full object-cover">
+                    </div>
+                    <div class="px-2">
+                        <h4 class="text-xl mb-3 font-medium">和栗のプレミアムモンブラン</h4>
+                        <p class="text-xs text-brand-dark/60 leading-relaxed mb-6 h-12">選び抜かれた和栗の香りを、軽やかな生クリームが引き立てます。</p>
+                        <p class="font-en text-lg tracking-widest text-brand-accent">¥920</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Section -->
+    <section id="access" class="py-24 md:py-40 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
+            <div class="w-full lg:w-1/2 reveal">
+                <h2 class="text-[10px] text-brand-accent tracking-[0.5em] uppercase mb-12 font-bold">Boutique Access</h2>
+                <div class="space-y-12 text-sm tracking-widest leading-loose">
+                    <div class="flex flex-col md:flex-row md:gap-20">
+                        <div class="mb-8 md:mb-0">
+                            <p class="text-[10px] text-brand-dark/40 mb-3 uppercase tracking-[0.2em]">Address</p>
+                            <p class="text-base">東京都渋谷区代々木 1-2-3<br>メゾン・ド・シュクレ 1F</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-brand-dark/40 mb-3 uppercase tracking-[0.2em]">Opening Hours</p>
+                            <p class="text-base">11:00 — 19:00<br><span class="text-xs text-brand-dark/60">(L.O. 18:30)</span></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:gap-20">
+                        <div class="mb-8 md:mb-0">
+                            <p class="text-[10px] text-brand-dark/40 mb-3 uppercase tracking-[0.2em]">Closed</p>
+                            <p class="text-base">火曜日・第2水曜日</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-brand-dark/40 mb-3 uppercase tracking-[0.2em]">Contact</p>
+                            <p class="text-base font-en">03-0000-0000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full lg:w-1/2 h-[500px] reveal relative group" style="transition-delay: 0.2s;">
+                <div class="absolute -inset-4 border border-brand-accent/20 -z-10 translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.7479754683506!2d139.701635!3d35.681238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cb2eb3132e3%3A0x704173c473f733!2z5Luj44CF5pyo6aeF!5e0!3m2!1sja!2sjp!4v1690000000000!5m2!1sja!2sjp" 
+                        class="w-full h-full grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark py-24 px-6 text-white text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="font-en text-3xl tracking-[0.3em] mb-12">L'Atelier de Sucre</h2>
+            <div class="flex justify-center space-x-12 mb-16">
+                <a href="#" class="text-[10px] tracking-[0.3em] hover:text-brand-accent transition-colors">INSTAGRAM</a>
+                <a href="#" class="text-[10px] tracking-[0.3em] hover:text-brand-accent transition-colors">FACEBOOK</a>
+                <a href="#" class="text-[10px] tracking-[0.3em] hover:text-brand-accent transition-colors">CONTACT</a>
+            </div>
+            <p class="text-[9px] tracking-[0.4em] opacity-40 uppercase">
+                &copy; <span id="year"></span> L'Atelier de Sucre. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navigation Background Change on Scroll
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-brand-beige/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('bg-brand-beige/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                nav.classList.add('py-6');
+            }
+        });
+
+        // Mobile Menu Logic
+        const toggle = document.getElementById('menu-toggle');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3')];
+        const links = document.querySelectorAll('.mobile-link');
+
+        let isOpen = false;
+        const toggleMenu = () => {
+            isOpen = !isOpen;
+            overlay.classList.toggle('open');
+            overlay.classList.toggle('opacity-0');
+            overlay.classList.toggle('pointer-events-none');
+            
+            if (isOpen) {
+                bars[0].style.transform = 'translateY(8px) rotate(45deg)';
+                bars[1].style.opacity = '0';
+                bars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                bars[0].style.transform = 'none';
+                bars[1].style.opacity = '1';
+                bars[2].style.transform = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        toggle.addEventListener('click', toggleMenu);
+        links.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Reveal Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = target.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
